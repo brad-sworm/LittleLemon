@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,15 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'littlelemon',
+        'USER': 'root',
+        'PASSWORD': 'root@123',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS':{
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -129,3 +137,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', 
+    ]
+}
